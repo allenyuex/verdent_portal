@@ -1,0 +1,155 @@
+import { User, Order, Product, MenuItem } from '@/types';
+
+export const mockUsers: User[] = [
+  {
+    id: '1',
+    email: 'user1@example.com',
+    name: 'Alice Johnson',
+    avatar: '',
+    phone: '123-456-7890',
+    createdAt: '2024-01-15T10:30:00Z',
+  },
+  {
+    id: '2',
+    email: 'user2@example.com',
+    name: 'Bob Smith',
+    avatar: '',
+    phone: '234-567-8901',
+    createdAt: '2024-02-20T14:20:00Z',
+  },
+  {
+    id: '3',
+    email: 'user3@example.com',
+    name: 'Carol Williams',
+    avatar: '',
+    phone: '345-678-9012',
+    createdAt: '2024-03-10T09:15:00Z',
+  },
+];
+
+export const mockOrders: Order[] = [
+  {
+    id: 'ORD-001',
+    userId: '1',
+    userName: 'Alice Johnson',
+    productName: 'Premium Headphones',
+    amount: 299.99,
+    status: 'completed',
+    createdAt: '2024-10-01T08:30:00Z',
+    updatedAt: '2024-10-02T10:00:00Z',
+  },
+  {
+    id: 'ORD-002',
+    userId: '2',
+    userName: 'Bob Smith',
+    productName: 'Wireless Mouse',
+    amount: 59.99,
+    status: 'processing',
+    createdAt: '2024-10-15T14:20:00Z',
+    updatedAt: '2024-10-15T14:20:00Z',
+  },
+  {
+    id: 'ORD-003',
+    userId: '3',
+    userName: 'Carol Williams',
+    productName: 'Mechanical Keyboard',
+    amount: 149.99,
+    status: 'pending',
+    createdAt: '2024-10-20T16:45:00Z',
+    updatedAt: '2024-10-20T16:45:00Z',
+  },
+  {
+    id: 'ORD-004',
+    userId: '1',
+    userName: 'Alice Johnson',
+    productName: 'USB-C Cable',
+    amount: 19.99,
+    status: 'cancelled',
+    createdAt: '2024-10-18T11:30:00Z',
+    updatedAt: '2024-10-19T09:00:00Z',
+  },
+];
+
+export const mockProducts: Product[] = [
+  {
+    id: 'PRD-001',
+    name: 'Premium Headphones',
+    description: 'High-quality wireless headphones with noise cancellation',
+    price: 299.99,
+    stock: 45,
+    status: 'active',
+    category: 'Audio',
+    imageUrl: '',
+    createdAt: '2024-01-10T10:00:00Z',
+    updatedAt: '2024-10-01T12:00:00Z',
+  },
+  {
+    id: 'PRD-002',
+    name: 'Wireless Mouse',
+    description: 'Ergonomic wireless mouse with customizable buttons',
+    price: 59.99,
+    stock: 120,
+    status: 'active',
+    category: 'Accessories',
+    imageUrl: '',
+    createdAt: '2024-02-15T14:30:00Z',
+    updatedAt: '2024-09-20T16:00:00Z',
+  },
+  {
+    id: 'PRD-003',
+    name: 'Mechanical Keyboard',
+    description: 'RGB mechanical keyboard with blue switches',
+    price: 149.99,
+    stock: 0,
+    status: 'inactive',
+    category: 'Accessories',
+    imageUrl: '',
+    createdAt: '2024-03-01T09:00:00Z',
+    updatedAt: '2024-10-10T11:30:00Z',
+  },
+  {
+    id: 'PRD-004',
+    name: 'USB-C Cable',
+    description: 'Fast charging USB-C cable 2m',
+    price: 19.99,
+    stock: 200,
+    status: 'active',
+    category: 'Accessories',
+    imageUrl: '',
+    createdAt: '2024-04-05T13:00:00Z',
+    updatedAt: '2024-10-05T15:00:00Z',
+  },
+];
+
+export const menuItems: MenuItem[] = [
+  {
+    id: 'users',
+    label: '用户管理',
+    icon: 'Users',
+    href: '/users',
+    children: [
+      { id: 'user-list', label: '用户列表', icon: 'List', href: '/users' },
+      { id: 'user-profile', label: '用户资料', icon: 'UserCog', href: '/users/profile' },
+    ],
+  },
+  {
+    id: 'orders',
+    label: '订单管理',
+    icon: 'ShoppingCart',
+    href: '/orders',
+    children: [
+      { id: 'order-list', label: '订单列表', icon: 'List', href: '/orders' },
+      { id: 'order-stats', label: '订单统计', icon: 'BarChart', href: '/orders/stats' },
+    ],
+  },
+  {
+    id: 'products',
+    label: '商品管理',
+    icon: 'Package',
+    href: '/products',
+    children: [
+      { id: 'product-list', label: '商品列表', icon: 'List', href: '/products' },
+      { id: 'product-categories', label: '商品分类', icon: 'Tag', href: '/products/categories' },
+    ],
+  },
+];
