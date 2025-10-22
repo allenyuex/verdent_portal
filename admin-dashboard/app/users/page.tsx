@@ -10,16 +10,28 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { mockUsers } from '@/lib/mock-data';
 import DashboardLayout from '@/components/layout/dashboard-layout';
+import AddUserModal from '@/components/users/add-user-modal';
+import { User } from '@/types';
 
 export default function UsersPage() {
   const [users, setUsers] = useState(mockUsers);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const filteredUsers = users.filter(
     user =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleAddUser = (userData: Omit<User, 'id' | 'createdAt'>) => {
+    const newUser: User = {
+      ...userData,
+      id: `user-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+    };
+    setUsers([...users, newUser]);
+  };
 
   return (
     <DashboardLayout>
@@ -29,7 +41,7 @@ export default function UsersPage() {
           <h1 className="text-2xl font-semibold text-neutral-900">用户列表</h1>
           <p className="mt-1 text-sm text-neutral-500">管理系统用户信息</p>
         </div>
-        <Button className="gap-2">
+        <Button className="gap-2" onClick={() => setShowAddModal(true)}>
           <Plus className="h-4 w-4" />
           添加用户
         </Button>
@@ -94,6 +106,12 @@ export default function UsersPage() {
           </Table>
         </CardContent>
       </Card>
+
+      <AddUserModal
+        open={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onAdd={handleAddUser}
+      />
       </div>
     </DashboardLayout>
   );

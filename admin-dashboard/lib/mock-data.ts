@@ -1,4 +1,4 @@
-import { User, Order, Product, MenuItem } from '@/types';
+import { User, Order, Product, MenuItem, Category } from '@/types';
 
 export const mockUsers: User[] = [
   {
@@ -37,6 +37,9 @@ export const mockOrders: Order[] = [
     status: 'completed',
     createdAt: '2024-10-01T08:30:00Z',
     updatedAt: '2024-10-02T10:00:00Z',
+    address: '123 Main St, New York, NY 10001',
+    phone: '123-456-7890',
+    note: '请在工作日配送',
   },
   {
     id: 'ORD-002',
@@ -47,6 +50,9 @@ export const mockOrders: Order[] = [
     status: 'processing',
     createdAt: '2024-10-15T14:20:00Z',
     updatedAt: '2024-10-15T14:20:00Z',
+    address: '456 Oak Ave, Los Angeles, CA 90001',
+    phone: '234-567-8901',
+    note: '',
   },
   {
     id: 'ORD-003',
@@ -57,6 +63,9 @@ export const mockOrders: Order[] = [
     status: 'pending',
     createdAt: '2024-10-20T16:45:00Z',
     updatedAt: '2024-10-20T16:45:00Z',
+    address: '789 Pine Rd, Chicago, IL 60601',
+    phone: '345-678-9012',
+    note: '门铃坏了，请电话联系',
   },
   {
     id: 'ORD-004',
@@ -67,6 +76,9 @@ export const mockOrders: Order[] = [
     status: 'cancelled',
     createdAt: '2024-10-18T11:30:00Z',
     updatedAt: '2024-10-19T09:00:00Z',
+    address: '123 Main St, New York, NY 10001',
+    phone: '123-456-7890',
+    note: '用户取消订单',
   },
 ];
 
@@ -121,6 +133,33 @@ export const mockProducts: Product[] = [
   },
 ];
 
+export const mockCategories: Category[] = [
+  {
+    id: 'CAT-001',
+    name: 'Audio',
+    description: '音频设备和配件',
+    productCount: 1,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-10-01T12:00:00Z',
+  },
+  {
+    id: 'CAT-002',
+    name: 'Accessories',
+    description: '各类电脑配件',
+    productCount: 3,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-10-01T12:00:00Z',
+  },
+  {
+    id: 'CAT-003',
+    name: 'Electronics',
+    description: '电子产品',
+    productCount: 0,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-10-01T12:00:00Z',
+  },
+];
+
 export const menuItems: MenuItem[] = [
   {
     id: 'users',
@@ -129,7 +168,6 @@ export const menuItems: MenuItem[] = [
     href: '/users',
     children: [
       { id: 'user-list', label: '用户列表', icon: 'List', href: '/users' },
-      { id: 'user-profile', label: '用户资料', icon: 'UserCog', href: '/users/profile' },
     ],
   },
   {

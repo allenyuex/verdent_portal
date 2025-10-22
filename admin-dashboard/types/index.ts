@@ -16,6 +16,9 @@ export interface Order {
   status: 'pending' | 'processing' | 'completed' | 'cancelled';
   createdAt: string;
   updatedAt: string;
+  address?: string;
+  phone?: string;
+  note?: string;
 }
 
 export interface Product {
@@ -27,6 +30,15 @@ export interface Product {
   status: 'active' | 'inactive';
   category: string;
   imageUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  productCount: number;
   createdAt: string;
   updatedAt: string;
 }

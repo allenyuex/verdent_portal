@@ -11,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { mockOrders } from '@/lib/mock-data';
 import { Order } from '@/types';
 import DashboardLayout from '@/components/layout/dashboard-layout';
+import OrderDetailModal from '@/components/orders/order-detail-modal';
+import { exportToCSV } from '@/lib/csv-export';
 
 const statusMap: Record<Order['status'], { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   pending: { label: '待处理', variant: 'outline' },
@@ -23,6 +25,8 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState(mockOrders);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
 
   const filteredOrders = orders.filter(order => {
     const matchesSearch =
@@ -35,6 +39,15 @@ export default function OrdersPage() {
     return matchesSearch && matchesStatus;
   });
 
+  const handleExport = () => {
+    exportToCSV(filteredOrders, `orders_${new Date().toISOString().split('T')[0]}.csv`);
+  };
+
+  const handleViewDetail = (order: Order) => {
+    setSelectedOrder(order);
+    setShowDetailModal(true);
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -43,7 +56,7 @@ export default function OrdersPage() {
           <h1 className="text-2xl font-semibold text-neutral-900">订单列表</h1>
           <p className="mt-1 text-sm text-neutral-500">查看和管理所有订单</p>
         </div>
-        <Button variant="outline" className="gap-2">
+        <Button variant="outline" className="gap-2" onClick={handleExport}>
           <Download className="h-4 w-4" />
           导出数据
         </Button>
@@ -104,7 +117,7 @@ export default function OrdersPage() {
                     {new Date(order.createdAt).toLocaleDateString('zh-CN')}
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" onClick={() => handleViewDetail(order)}>
                       查看详情
                     </Button>
                   </TableCell>
@@ -114,6 +127,12 @@ export default function OrdersPage() {
           </Table>
         </CardContent>
       </Card>
+
+      <OrderDetailModal
+        order={selectedOrder}
+        open={showDetailModal}
+        onClose={() => setShowDetailModal(false)}
+      />
 
       <div className="grid gap-6 md:grid-cols-4">
         <Card>
